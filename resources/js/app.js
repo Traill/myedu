@@ -1,0 +1,13 @@
+/*global define */
+'use strict';
+
+define(['angular', 'jquery'], function (angular, $) {
+    var app = angular.module('trailhead', function($routeProvider, $locationProvider) {
+    	// $locationProvider.html5Mode(true).hashPrefix('!');
+    	
+    	
+
+    });
+
+    return app;
+});

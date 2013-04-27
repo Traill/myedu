@@ -1,266 +1,76 @@
-<!DOCTYPE html>
-<html lang="en" >
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+
+<!--
+ *
+ * Author: Jonas Arnfred
+ *		   Yannik Messerli
+ *
+ *		  _______        _ _ _                    _ 
+ *		 |__   __|      (_) | |                  | |
+ *		    | |_ __ __ _ _| | |__   ___  __ _  __| |
+ *		    | | '__/ _` | | | '_ \ / _ \/ _` |/ _` |
+ *		    | | | | (_| | | | | | |  __/ (_| | (_| |
+ *		    |_|_|  \__,_|_|_|_| |_|\___|\__,_|\__,_|
+ *                                                                                             
+ *          ----------------------------------------
+ *
+ -->
+
+
 
 <head>
 
-
-
-<link type="text/css" rel="stylesheet" href="/css/reset.css"/>	
-<link type="text/css" rel="stylesheet" href="/css/graph.css"/>
-
 <link rel="icon" type="image/gif" href="/img/favicon.ico" />
 
-<title>Trailhead: A Graphical Representation of Articles</title>
+<title>Trailhead: A Graphical Representation of Courses</title>
+	
+
+	<!-- css -->
+	<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	
+	
+
+	<!-- Only for dev purpose: -->
+	<link rel="stylesheet/less" type="text/css" href="less/structure.less" />
+	<link rel="stylesheet/less" type="text/css" href="less/stuff.less" />
+	<script src="js/lib/less.js" type="text/javascript"></script>
+
 </head>
 
 <body>
 
-<!-- Loading curl -->
-<script type="text/javascript" src="/js/lib/curl/curl.js"></script>
-<script>
-
-// Set up curl
-curl(
-
-	// Set up the configuration
-	{
-		baseUrl: '/js',
-		paths: {
-			"ajax": "../ajax",
-			"jquery": "lib/jquery/jquery",
-			"jquery/lib": "lib/jquery",
-			"radio": "lib/radio/radio"
-		},
-	}, 
-
-	// Set up the required modules
-	["controllers/controller","async!googleAnalytics"],
-
-	// The call back function
-	function(controller, ga) {
-		// Do nothing
-	}
-)
-
-</script>
 	
 
 
-	<div id="content">
-
-	<div id="topbar" class="form">
-		<div id="header" class="left">
-			<a href="/pages/about.html" id="logo"><div></div></a>
-		</div>
-		<a href="/pages/about.html" id="info_btn"><div>i</div></a>
-		<div id="save_graph_w" class="popup_w">
-			<a href="http://" id="save_graph" class="btn">Save the graph</a>
-			<div class="popup">
-				<div id="savegraph_form">
-					<span id="savegraph_url"></span>
-					<input type="text" name="savegraph_val" id="savegraph_val" value="" />
-					<input style="display:none" type="submit" name="savegraph_button" id="savegraph_button" value="Save Graph" style="float:left;" />
-					<div class="clear" style="height:5px;"></div>
-					<span style="display:none" id="name_is_taken" class="nameresult">The name is already taken</span>
-					<span style="display:none" id="name_is_free" class="nameresult">The name is free</span>
-					<span style="display:none" id="checkname">Checking if name is taken</span>
-				</div>
-				<div id="savegraph_done" style="display:none">
-					<input type="text" onMouseUp="return false;" name="savegraph_link" id="savegraph_link" value="" />
+	<div id="main_view" class="container" ng-height="win" ng-controller="MainCtlr" ng-resizable-view> 
+        <div class="left_part" ng-height="win">
+            <div class="view">
+                <ng-view></ng-view>
+            </div>
+            
+        </div>
+        <div class="right_part" ng-height="win">
+			<div id="loader">
+				<div class="content">
+					<div style="margin-bottom: 10px;"> Loading... Please wait.</div>
+					<div><img src="/img/loader.gif" alt="" /></div>
 				</div>
 			</div>
-		</div>
+        </div>
+        <div class="draggable2" ng-height="win"></div>
+        <div class="close_btn">
+            <i class="icon-chevron-left"></i>
+        </div>
 
+    </div>
 
-		<div id="zoomer_w" class="popup_w">
-			<a href="http://" id="zoomer_b" class="btn">Zoom: <input type="text" name="zoom_val" id="zoom_val" value="" disabled/></a>
-			<div class="popup">
-				<div id="zoomer">
-					<a href="#" class="moins">-</a>
-					<div id="scale">
-						<a href="#" id="indicator"></a>
-					</div>
-					<a href="#" class="plus">+</a>
-				</div>
-			</div>
-		</div>
-
-		<div class="clear"></div>
-	</div>
-
-
-	<!-- Graph -->
-	<div id="graph" class="graph"></div>
-	<div id="zoomer">
-		<a href="#" class="moins">-</a>
-		<div id="scale">
-			<a href="#" id="indicator"></a>
-		</div>
-		<a href="#" class="plus">+</a>
-	</div>
-	<div id="message_wrap"></div>
-	<div id="infowrap"><div id="info" class="message"><p></p></div></div>
-	<div id="clickwrap"><div id="clickbox">
-			<div class="click" id="select"><a href="#" title="Add to schedule"><img alt="Add to Schedule" src="/img/icons/calendar.png"/></a></div>
-			<!-- <div class="click" id="abstract"><img alt="Show Info" src="/img/icons/info.png"/></div> -->
-			<!-- <div class="click" id="download"><a href="#" title="Download"><img alt="Download Paper" src="/img/icons/download.png"/></a></div> -->
-	</div></div>
-
-	<!-- List -->
-	<a href="#" id="closeSidebar"><div></div></a>
-	<div id="tabs" class="text">
-		<div id="map">
-			<svg width="100%" height="150px"></svg>
-		</div>
-		
-		<ul id="tabhead">
-		        <li><a href="#tabs-2">Schedule</a></li>
-		        <li><a href="#tabs-1">Info</a></li>
-		        <li><a href="#tabs-3">Search</a></li>
-		</ul>
-		<div class="scrollable" id="tabs-2">
-			<div class="scrolltop"></div>
-		
-			<div class="toolbar">
-				<a href="#"><div class="downpdf"><img alt="Download Paper" src="/img/pdf.png"/>Download pdf</div></a>
-				<a href="#"><div class="downicn"><img alt="Download Paper" src="/img/ical.png"/>Download ical</div></a>
-			</div>
-			<div style="margin: 10px 30px; height: 6px;">
-				<a href="#" class="removeall smalltool"><span class="iconx">x</span> Remove all</a>
-			</div>
-				<ul id="sidebar"><!-- This is a template used in the schedule -->
-					<li id="listItemTemplate" class="listItem">
-						
-						<a class="listItemPdfLink" href="#" target="_blank">
-							<a href="#" class="listItemRemove">
-								<img src="/img/icons/remove.png" />
-							</a>
-							<span class="listItemLabel">
-								<div class="clear" style="height: 8px;"></div>
-								<img src="/img/icons/paper.png" />
-								<p class="listItemText">List item</p>
-								<div class="clear" style="height: 8px;"></div>
-							</span>
-							<div class="clear"></div>
-						</a>
-						<input type="hidden" name="papers[]" value="" />
-					</li>
-				</ul>
-			<div id="schedule">
-			</div>
-		</div>
-
-
-		<div class="scrollable" id="tabs-3">
-		
-			<div class="scrolltop"></div>
-			<div class="form-w form">
-				<form id="filterForm" onSubmit="return false;">
-					<label for="keywords">Search</label>
-					<input type="text" name="keywords" value="" class="filter" />
-					<div class="field">
-						<label for="context">Context</label>
-						<select id="context-select" multiple="multiple" name="context[]" value="">
-							<option selected="selected" value="title">Title</option>
-							<option selected="selected" value="authors">Authors</option>
-							<!--<option value="abstract">Abstract</option>
-							<option value="body">Body</option>
-							<option value="refs">References</option>-->
-						</select>
-					</div>
-					<div class="field">
-						<label for="room">Location</label>
-						<select name="room">
-							<option value="">Not Selected</option>
-						</select>
-					</div>
-					<div class="clear" style="height: 8px;"></div>
-					<div class="field">
-						<label class="inline_label" for="from" style="margin-left: 0px; margin-right: 1px;">From</label>
-						<input type="text" style="width: 80px;" name="from" class="date_picker2">
-						<label  class="inline_label" for="fromtime"  style="margin-left: 5px; margin-right:2px;">Time: </label>
-						<input type="text"  name="fromtime"  style="width: 35px;">
-						<div class="clear"></div>
-					</div>
-					<div class="field">
-						<label class="inline_label" for="to" style="margin-left: 0px; margin-right: 15px;">To</label>
-						<input type="text"  name="to"  style="width:80px;" class="date_picker2">
-						<label  class="inline_label" for="totime"  style="margin-left: 5px; margin-right:2px;">Time: </label>
-						<input type="text"  name="totime"  style="width: 35px;">
-						<div class="clear"></div>
-					</div>
-					<div style="height: 30px; margin-top: 10px;">
-						<button  class="submit" name="add" id="addFilter">Add</button>
-					</div>
-				</form>
-	
-				<hr width="90%"/>
-
-								
-				<div class="clear" style="height: 20px;"></div>
-					<ul id="filterList">
-						<li id="filterItemTemplate" class="filterItem">
-							
-							<a href="#" class="listItemRemove">
-								<img src="/img/icons/remove.png" />
-							</a>
-							
-							
-								<span class="listItemLabel">
-									<div class="clear" style="height: 8px;"></div>
-									<img src="/img/filter.png" />
-									<p class="filterItem"></p>
-									<div class="clear" style="height: 8px;"></div>
-								</span>
-							<div class="clear"></div>
-						</li>
-					</ul>
-				</div>
-			</div>
-		<div class="scrollable" id="tabs-1">
-
-			<div class="scrolltop"></div>
-			<div class="clear"></div>
-			<div id="template_info">
-					
-					<h1 class="title"></h1>
-					
-					<hr width="100%"/>
-					
-					<div class="time_location">
-						<div class="time left"><b></b></div>
-						<div class="location right"><b></b></div>
-						<div class="clear"></div>
-					</div>
-
-					<div class="authors"></div>
-
-					<!-- <div class="toolbarinfo"></div> -->
-
-					<div id="tab1-summary"></div>
-
-				</div>
-			<div class="content_tab">
-
-				<div class="form-w" style="margin-top:40px; text-align:center;">no node selected</div>
-				
-			</div>
-			
-			
-			</div>
-		</div>
-
-		
-		
-	</div>
-
-</div>
-
-<div id="loader">
-	<div class="content">
-		<div style="margin-bottom: 10px;"> Loading... Please wait.</div>
-		<div><img src="/img/loader.gif" alt="" /></div>
-</div>
+	<script src="js/lib/require.js" data-main="js/main"></script>
 </body>
 </html>
 
