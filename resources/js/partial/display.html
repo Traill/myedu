@@ -1,0 +1,13 @@
+<div>
+	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100%" height="100%" >
+	   <filter id="drop-shadow">
+	       <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur"/>
+	       <feOffset in="blur" dx="0" dy="0" result="offsetBlur"/>
+	       <feMerge>
+	           <feMergeNode in="offsetBlur"/>
+	           <feMergeNode in="SourceGraphic"/>
+	      </feMerge>
+	   </filter> 
+	   <ng-transclude></ng-transclude>
+	</svg>
+</div>

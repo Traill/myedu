@@ -1,0 +1,73 @@
+<div class="wrap">
+
+  <form name="node_form" ng-controller="formCtrl" ng-init="node.id=26" class="ng-scope ng-valid ng-valid-required ng-dirty">
+
+    <input type="hidden" name="layer_id" ng-model="{{node.layer_id}}" value="1" min="-1" max="7" required="" class="ng-pristine ng-valid ng-valid-required">
+
+    <div class="alert" ng-show="!node_form.$valid" style="display: none; "><button type="button" class="close" data-dismiss="alert">×</button> <strong>Warning!</strong> Some error in the form.</div><div class="alert alert-error" ng-show="node_form.$httpError" style="display: none; "><button type="button" class="close" data-dismiss="alert">×</button> <strong>Oups!</strong> The connection internet seems to be lost!</div>
+
+
+    <input type="hidden" name="id" ng-model="node.id" value="{{node.id}}" required="" class="ng-pristine ng-valid ng-valid-required">  
+
+	<div id="arian" class="small">
+		
+    <input type="submit" class="btn btn-primary btn-mini pull-right" value="Save Page" ng-click="send()">
+    <a href="#" class="btn btn-danger btn-mini delete_toggler pull-right" style="margin-right:8px;" rel="26">Delete</a>
+    <input type="submit" value="Submit and return home" class="btn btn-mini pull-right" ng-click="send('http://localhost/_clients/bionic2/public/index.php/admin/node')" style="margin-right:10px;">
+    
+	</div>
+	
+	<div class="clearfix"></div>
+
+	<div class="page-header">
+		<h1 class="center">
+			{{node.title}}
+		</h1>
+
+		<div class="subtitle center ">
+			{{node.subtitle}}
+		</div>
+
+	</div>
+	
+	
+	
+	<div class="content" ng-bind-html-unsafe="node.content">
+		
+	</div>
+	
+	
+
+</div>
+
+
+<div class="modal hide fade" id="delete_page">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Are You Sure?</h3>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this page?</p>
+      </div>
+      <div class="modal-footer">
+        <?php echo Form::open('admin/node/delete', 'POST')?>
+        <a data-toggle="modal" href="#delete_page" class="btn">Keep</a>
+        <input type="hidden" name="id" id="postvalue" value="" />
+        <input type="submit" class="btn btn-danger" value="Delete" />
+        <?php echo Form::close()?>
+      </div>
+    </div>
+    <script>
+      $('#delete_page').modal({
+        show:false
+      }); // Start the modal
+
+      // Populate the field with the right data for the modal when clicked
+      $('.delete_toggler').each(function(index,elem) {
+          $(elem).click(function(evt){
+          	evt.preventDefault();
+            $('#postvalue').attr('value',$(elem).attr('rel'));
+            $('#delete_page').modal('show');
+          });
+      });
+    </script>

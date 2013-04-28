@@ -1,0 +1,247 @@
+#main_view{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+#main_view .left_part, #main_view .right_part{
+	width: 50%;
+	height: 100%;
+	position: absolute;
+	z-index: 1;
+}
+#main_view .left_part{
+	background: #ffffff;
+	margin-top: -1px;
+	padding-bottom: 1px; 
+	box-shadow: 0px 0px 3px rgba(0,0,0,.5);
+	z-index: 2;
+	overflow: scroll;
+}
+
+#main_view .draggable2{
+	position: absolute;
+	cursor: col-resize;
+	width: 10px; 
+	background: transparent;
+	display: inline-block;
+	z-index: 3;
+}
+
+
+#main_view .close_btn{
+	padding: 10px;
+	display: inline-block;
+	background: #ffffff;
+	float: right;
+	margin-right: -35px;
+	margin-top: 15px;
+	border-bottom: 1px solid #cdcdcd;
+	border-top: 1px solid #cdcdcd;
+	border-right: 1px solid #cdcdcd;
+	cursor: pointer;
+	position: absolute;
+	z-index: 4;
+	border-radius: 0px 3px 3px 0px;
+}
+
+#body_select{
+	height: 40px;
+	overflow: hidden;
+	left: 45px;
+	top: 15px;
+	.nav a{
+		padding-top: 9px;
+		height: 40px;
+		padding-left: 20px;
+		padding-right: 15px;
+		background: url(../img/arrow.png) no-repeat;
+		cursor: pointer;
+	}
+	.nav li:first-child a{
+		background: none;
+	};
+	.nav li a{
+		font-size: 9px;
+		color: #000;
+	}
+	.nav li.active a, .nav li.active a:hover{
+		color: #ff0000;
+		font-weight: bold;
+		//text-shadow: 0px 0px 1px #000;
+	}
+}
+
+#zoom{
+	height: 40px;
+	width: 80px;
+	overflow: hidden;
+	right: 20px;
+	top: 15px;
+	font-size: 9px;
+	cursor: pointer;
+	.value{
+		margin-left: 8px;
+		
+	}
+	.w{
+		margin: 8px 10px;
+	}
+	.slide{
+		border-radius: 5px;
+		height: 2px;
+		background: #EDEDED;
+		border: 1px solid #9C9C9C;
+		width: 180px;
+		margin-left: 10px;
+		margin-top: 45px;
+		.knob2{
+			width: 7px;
+			height: 7px;
+			border: 1px solid #929292;
+			border-radius: 4px;
+			-moz-background-clip: padding;
+			-webkit-background-clip: padding-box;
+			background-clip: padding-box;
+			position: absolute;
+			background-color: #cfcfcf;
+			cursor: pointer;
+			margin-top: -3px;
+		}
+	}
+}
+
+.navtop{
+	border: 1px solid #cdcdcd;
+	position: absolute;
+	z-index: 4;
+	border-radius: 3px;
+	background: #fff;
+}
+
+.wrap{
+	margin: 40px 13%;
+}
+
+.right_part #human_body{
+	position: absolute;
+	width: 100%;
+	z-index: 1;
+}
+
+
+
+
+.borad{
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.bosha{
+	-moz-box-shadow: 0 1px 3px rgba(0,0,0,.5);
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,.5);
+	box-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+
+.label-pf{
+	color: #9f9f9f;
+	font-family: "PF BeauSans Pro", sans-serif;
+	font-size: 9px;
+
+}
+.center{
+	text-align: center;
+}
+
+
+#min-map{
+	width: 112px;
+	height: 184px;
+	float: right;
+	right: 20px;
+	bottom: 20px;
+	background: white;
+	position: absolute;
+	z-index: 2;
+	.bosha;
+
+	.cadre{
+		height: 150px;
+		margin: 5px;
+		width: 100px;
+		border: 1px solid rgba(161,161,161,.51);
+		background-color: #fbfbfb;
+
+	}
+}
+.slider_w{
+	.borad;
+	position: absolute;
+	z-index: 2;
+	bottom: 20px;
+	left: 20px;
+	width: 24px;
+	height: 185px;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	background-color: #fff;
+	.bosha;
+	.label-pf{
+		border-top: 1px solid #d1d1d1;
+		.center;
+	}
+}
+#slider {
+	
+	width: 24px;
+	height: 165px;
+	
+	
+
+	.slide {
+	
+		height: 200px;
+		width: 12px; 
+		margin-left: 6px;
+		
+		.knob {
+			width: 30px;
+			height: 6px;
+			margin-left: -10px;
+			border: 1px solid #fa6464;
+			.borad;
+			-moz-background-clip: padding;
+			-webkit-background-clip: padding-box;
+			background-clip: padding-box;
+			background-color: #ca6969;
+			-moz-box-shadow: 1px 2px 2px rgba(1,1,1,.75), inset 0 0 5px #8d2121;
+			-webkit-box-shadow: 1px 2px 2px rgba(1,1,1,.75), inset 0 0 5px #8d2121;
+			box-shadow: 1px 2px 2px rgba(1,1,1,.75), inset 0 0 5px #8d2121;
+			position: absolute;
+			cursor: pointer;
+			top: 10px;
+			z-index: 5;
+			
+		}
+		.knob:hover, .knob.selected{
+				background-color: #ff0000;
+				border: solid 1px #423434;
+			}
+		
+
+		.part {
+			width: 100%;
+		}
+		
+		.l {
+			border-bottom: 1px solid #d1d1d1;
+
+		}
+	}
+
+}
+
+
+
