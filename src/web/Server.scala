@@ -12,7 +12,7 @@ object Main {
   def main(args : Array[String]): Unit= {
 
     // Initialize data
-    PaperModel.init("ita2013")
+    MyEduModel.init("myeducs")
 
     // Fetch the server
     val srv = Server.init

@@ -12,28 +12,28 @@ object Ajax extends async.Plan with ServerErrorResponse {
   def intent = {
 
     // Get abstract
-    case req @ Path(Seg("ajax" :: "abstract" :: id :: Nil)) => {
-      PaperModel.getAbstract(id) match {
-        case Some(t)  => req.respond(Json(("success" -> true) ~ ("id" -> id) ~ ("abstract" -> t)))
+    case req @ Path(Seg("ajax" :: "node" :: id :: Nil)) => {
+      MyEduModel.getNode(id) match {
+        case Some(t)  => req.respond(Json(("success" -> true) ~ ("id" -> id) ~ ("node" -> t)))
         case None     => req.respond(Json(("success" -> false) ~ ("id" -> id)))
       }
     }
 
     // Get nodes
-    case req @ Path(Seg("ajax" :: "nodes.js" :: Nil)) => {
-      val json : String = PaperModel.getJsonNodes
-      req.respond(JsonContent ~> ResponseString("define(function() { return " + json + "; })"))
+    case req @ Path(Seg("ajax" :: "nodeIDs" :: Nil)) => {
+      val json : String = MyEduModel.getNodeIds
+      req.respond(Json(("success" -> true) ~ ("ids" -> json)))
     }
 
     // Get edges
-    case req @ Path(Seg("ajax" :: "edges.js" :: Nil)) => {
-      val json : String = PaperModel.getJsonEdges
-      req.respond(JsonContent ~> ResponseString("define(function() { return " + json + "; })"))
+    case req @ Path(Seg("ajax" :: "edges" :: Nil)) => {
+      val json : String = MyEduModel.getEdges
+      req.respond(Json(("success" -> true) ~ ("edges" -> json)))
     }
 
     // Get cluser of size k
     case req @ Path(Seg("ajax" :: "clusters" :: k :: Nil)) => {
-      val json : String = PaperModel.getClusters(k)
+      val json : String = MyEduModel.getClusters(k)
       req.respond(JsonContent ~> ResponseString(json))
     }
 

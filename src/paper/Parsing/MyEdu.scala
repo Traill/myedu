@@ -15,13 +15,13 @@ trait MyEdu extends XMLParser with PDFLoader
     val json = parse(Source.fromFile(path).getLines.mkString)
 
     // Get paper and abstract if possible
-    val course : Course = getCourse(json)
+    val course : Option[Course] = getCourse(json)
 
     // Add data to document if available
-    Some(doc.setData(course))
+    course map { doc.setData(_) }
   }
 
-  private def getCourse(json : JValue) : Course = {
+  private def getCourse(json : JValue) : Option[Course] = {
 
     // Get text of album
     val text = (json \ "en" \ "free_text" match { 
@@ -38,7 +38,8 @@ trait MyEdu extends XMLParser with PDFLoader
       case JArray(l) => l.map { case JObject(_ :: JField(_,JString(n)) :: _) => Person(n) } 
     }
 
-    Course(title, profs, Body(stripTags(text)))
+    if (text == "" || title.text == "" || profs == List()) None
+    else Some(Course(title, profs, Body(stripTags(text))))
   }
 
   private def stripTags(body : String) : String = {

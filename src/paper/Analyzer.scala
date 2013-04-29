@@ -12,7 +12,6 @@ object Analyzer extends GetFiles {
   val cacheDir : String = Cache.basedir
   var collection : String = ""
 
-
   // Initialize files from directory
   def initialize(path : String) : Analyzer = {
 
