@@ -5,6 +5,7 @@ require.config({
       angular: 'lib/angular.min',
       bootstrap: 'lib/bootstrap',
       d3: 'lib/d3.v2.min',
+      radio: 'lib/radio/radio.min'
     },
     shim: {
         bootstrap: {
@@ -26,7 +27,8 @@ require([
         'jquery',
         'bootstrap', 
         'directives/height',
-        'directives/resizableview', 
+        'directives/resizableview',
+        'directives/display', 
         'controllers/main'
     ], function (app, $) {
     

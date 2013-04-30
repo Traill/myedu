@@ -21,7 +21,7 @@ define(['angular', 'app'], function (angular, app) {
 		}
 
 
-		
+		console.log($location);
 
 		
 	});
