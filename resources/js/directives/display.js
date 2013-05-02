@@ -46,7 +46,7 @@ define(['app', "jquery", 'd3', 'radio', 'services/position'], function ( app, $,
 	    	},
 	    	link: function(scope, element, attr, drawer, position, $window) {
 	    		
-	    		scope.width = "test";
+	    		
 	    		// Create and set the zoom and pan:
 	    		element.svgPan('viewport');
 	    		// Get the viewport element:

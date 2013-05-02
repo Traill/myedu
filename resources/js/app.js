@@ -9,7 +9,7 @@ define(['angular', 'jquery'], function (angular, $) {
 		    templateUrl: 'js/partial/home.html'
 		});
 
-		$routeProvider.when('/course/:node', {
+		$routeProvider.when('/node/:node', {
 		    templateUrl: 'js/partial/view.html',
 		    controller: 'nodeCtrl'
 		});
