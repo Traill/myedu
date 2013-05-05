@@ -23,19 +23,13 @@ define(['jquery', 'app'], function ($, app) {
 			matrix: {}
 		};
 
-		service.on = function(name, callback){
-			if(!events[name])
-				events[name] = new Array();
-			events[name].push(callback);
-		}
 
 		service.fire = function(name){
 			var event = jQuery.Event(name);
 			event.position = position;
 			event.matrix = position.matrix;
-			$.each(events[name], function(i, callback){
-				callback(event);
-			});
+			
+			radio('position:'+name).broadcast(event);
 		}
 
 		service.set = function(matrix){
@@ -57,6 +51,8 @@ define(['jquery', 'app'], function ($, app) {
 	    	position.s = matrix.a;
 	    	position.x = matrix.e;
 	    	position.y = matrix.f;
+				
+
 			service.fire('change');
 		}
 

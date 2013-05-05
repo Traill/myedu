@@ -5,6 +5,8 @@ require.config({
       angular: 'lib/angular.min',
       bootstrap: 'lib/bootstrap',
       d3: 'lib/d3.v2.min',
+      radio: 'lib/radio/radio.min',
+      viva:    'lib/vivagraph'
     },
     shim: {
         bootstrap: {
@@ -13,6 +15,9 @@ require.config({
         },
         angular: {
             exports: 'angular'
+        }, 
+        viva: {
+            exports: 'viva'
         },
         d3: {
             exports: 'd3'
@@ -26,8 +31,11 @@ require([
         'jquery',
         'bootstrap', 
         'directives/height',
-        'directives/resizableview', 
-        'controllers/main'
+        'directives/resizableview',
+       // 'directives/display', 
+        'controllers/main',
+        'controllers/graph',
+        'controllers/node'
     ], function (app, $) {
     
     'use strict';

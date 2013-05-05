@@ -35,6 +35,7 @@ define(['jquery', 'app'], function ($, app) {
 			if(!is_open){
 				is_open = true;
 				service.fire('open');
+				service.fire('change');
 			}
 		}
 
@@ -42,6 +43,7 @@ define(['jquery', 'app'], function ($, app) {
 			if(is_open){
 				is_open = false;
 				service.fire('close');
+				service.fire('change');
 			}
 		}
 
