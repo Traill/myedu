@@ -16,8 +16,8 @@ Setup for testing
 -----------------
 
 For Trailhead to work you must have an instance of 
-[http://mongodb.org](mongoDB) running in the background and 
-[http://scala-sbt.org](sbt) installed on your system. Once you've installed 
+[mongoDB](http://mongodb.org) running in the background and 
+[sbt](http://scala-sbt.org) installed on your system. Once you've installed 
 these, clone the repository:
 ```sh
 git clone https://github.com/Traill/myedu.git
@@ -43,7 +43,7 @@ In the last command the following things happen:
 
 Now that the database is set up, all that is left to do is to write *exit* to 
 exit the console, and type sbt run from the command line. Trailhead should now 
-be running on http://localhost:8080
+be running on [http://localhost:8080]
 
 The Analyzer
 ------------
@@ -87,8 +87,8 @@ documents. Note that this function doesn't have a return type of Analyzer.
 -  *spectral(k : Int) : Analyzer* Partitions the graph of documents into *k* 
    partitions, that are then saved with the Document.
 -  *louvain(treshold : Int = 20) : Analyzer* As above but using a modularity 
-   optimizing graph clustering technique commonly known as the 
-[http://arxiv.org/pdf/0803.0476](louvain method).
+   optimizing graph clustering technique commonly known as the [louvain 
+method](http://arxiv.org/pdf/0803.0476).
 -  *get(id : String) : Option[Document]* Returns the document corresponding to 
    the id if such a document exists.
 
@@ -109,7 +109,7 @@ val a = Analyzer.initialize("gnuf").parse.link.save
 Once this is done, open the file "*src/web/Server.scala*" and modify line *15* 
 so "myeducs" is changed to "gnuf". Now you can run the server by calling "sbt 
 run" from the command line and seeing the result in your browser
-[http://localhost:8080](here).
+[here](http://localhost:8080).
 
 Credits
 -------
