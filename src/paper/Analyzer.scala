@@ -163,7 +163,7 @@ case class Analyzer(docs : Map[String, Document])
   /**
    * Filters the links
    */
-  def takeNLinks(n : Int) : Analyzer = {
+  private def takeNLinks(n : Int) : Analyzer = {
 
     // Take the n strongest connections
     def takeN(n : Int)(ls : List[Link]) : List[Link] = ls.sortBy(_.weight).reverse.take(n)
@@ -179,7 +179,7 @@ case class Analyzer(docs : Map[String, Document])
   /**
    * Filters the links
    */
-  def overNLinks(n : Int) : Analyzer = {
+  private def overNLinks(n : Int) : Analyzer = {
 
     // Take only links over a certain treshold
     def overN(n : Int)(ls : List[Link]) : List[Link] = ls.filter(_.weight > n)
