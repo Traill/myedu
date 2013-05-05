@@ -63,13 +63,13 @@ with the Analyzer companion object we have the following functions:
 ready to be parsed.
 -  **fromCache(c : String) : Analyzer** -- If data has been loaded from folder 
    "my_folder" and saved to Cache, it can be loaded directly by calling 
-**Analyzer.fromCache("my_folder")**.
+*Analyzer.fromCache("my_folder")*.
 
 The Analyzer class then supports the following methods:
 
 -  **parse : Analyzer** -- For every id in the analyzer, the corresponding file 
    is parsed and loaded into the Document case class. Note that you should call 
-**Analyzer.initialize** before calling parse.
+*Analyzer.initialize* before calling parse.
 -  **link : Analyzer** -- For every document in the analyzer, the similarity to 
    all other documents is calculated. Note that you should call 
 *Analyzer.parse* or *Analyzer.fromCache("folder_name")* before loading since we 
@@ -77,8 +77,8 @@ need the data parsed before it can be linked.
 -  **save : Analyzer** -- Save all the documents to the database. This will 
    overwrite previously saved documents from the same folder name without 
 notifying you.
--  **load : Analyzer** -- Load all the documents from the database. Usually used 
-   in conjunction with **Analyzer.fromCache("folder_name")** (e.g.  
+-  **load : Analyzer** -- Load all the documents from the database. Usually 
+   used in conjunction with *Analyzer.fromCache("folder_name")* (e.g.  
 *Analyzer.fromCache("myedu").load*).
 -  **graph : Graph** -- Returns a graph structure where each document is a node 
    and the links have weights corresponding to the similarity between two 
