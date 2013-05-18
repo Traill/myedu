@@ -1,24 +1,33 @@
 /*global define */
 'use strict';
 
-define(['angular', 'app', 'views/graphic', 'graph/Core/graph_random', "graph/Layout/layout"], function (angular, app, Graphic, GraphRandom, Layout) {
+define(['angular', 'app', 'views/graphic', 'graph/Core/graph', "graph/Layout/layout", "jquery"], function (angular, app, Graphic, Graph, Layout, $) {
     app.controller('graphCtlr', function($scope, $location, drawer) {
 
     	// Create a graphic to display some graphes:
-		var g = new Graphic($('#view_graph')[0]),
-		// For now, use Vivagraph random stuff:
-		graph = new GraphRandom(10, 10),
+		var g = new Graphic($('#view_graph')[0]);
+		// Load the ids:
+		$.getJSON('ajax/edges', function(data){
+			var edges = $.parseJSON(data.edges);
+			
+			console.log('Loading '+edges.length + ' edges...')
 
-		// display a common renderer: the forceLayout:
-		layout = new Layout(graph, g);
+			// Create the graph
+			var graph = new Graph(edges.slice(1, 1000)),
 
-		layout.run();
+			// display a common renderer: the forceLayout:
+			layout = new Layout(graph, g);
 
-		drawer.on('change', function(){
-			g.fire('rescaled');
+			layout.run();
+
+			
 		});
 		
 		
+		drawer.on('change', function(){
+			g.fire('rescaled');
+		});
+
 
 
 		

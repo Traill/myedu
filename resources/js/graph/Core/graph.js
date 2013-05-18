@@ -15,7 +15,7 @@ define(
 
     	var id;
     	var ui = null;
-
+        var _graph = {};
 
     	//////////////////////////////////////////////
 		//											//
@@ -23,18 +23,22 @@ define(
 		//											//
 		//////////////////////////////////////////////
 
-        function Graph (nodes) { //_x, _y
+        function Graph (edges) { //_x, _y
             
-            extend(this, Viva.Graph.graph());
+            extend(_graph, Viva.Graph.graph());
 
-            $.each(nodes, function(i, nodeData){
-            	var n = new Node(nodeData);
+            $.each(edges, function(i, edge){
+            	var s = new Node(edge.source, {} );
 
-            	this.addNode(n.id, n);
+                var t = new Node(edge.target, {} );
+
+            	_graph.addNode(s.id, s);
+                _graph.addNode(t.id, t);
+                _graph.addLink(s.id, t.id, {value: edge.value} );
             });
            
-
-        }
+            return _graph;
+        }   
 
 
 
