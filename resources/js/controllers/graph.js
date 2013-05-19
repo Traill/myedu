@@ -4,11 +4,11 @@
 define(['angular', 'app', 'views/graphic', 'graph/Core/graph', "graph/Layout/layout", "jquery"], function (angular, app, Graphic, Graph, Layout, $) {
     app.controller('graphCtlr', function($scope, $location, drawer) {
 
-    	// Create a graphic to display some graphes:
+		// Create a graphic to display some graphes:
 		var g = new Graphic($('#view_graph')[0]);
 		// Load the ids:
 		$.getJSON('ajax/edges', function(data){
-			var edges = $.parseJSON(data.edges);
+			var edges = data.edges;
 			
 			console.log('Loading '+edges.length + ' edges...')
 
