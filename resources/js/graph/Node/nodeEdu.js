@@ -68,13 +68,24 @@ define(
 
             // Overwrite of the click function:
             // 
-            this.click = this.clickBck || function(){
+            this.click = function(){
 
                 // Update the view panel:
                 window.location = "#/node/" + id;
 
                 // Publish the event
                 // [TODO]
+            }
+
+            // Select node:
+            this.select = function(node){
+                node.ui.attr('fill', '#ff0000');
+                node.ui.attr('class', 'node current');
+            }
+            // Deselect
+            this.deselect = function(node){
+                node.ui.attr('fill', colorBySection(_id));
+                node.ui.attr('class', 'node');
             }
 
             //////////////////////////////////////////////
@@ -87,6 +98,8 @@ define(
                 $(ui).on('click', function(){
                     node.click();
                 });
+
+
             }
 
         }
