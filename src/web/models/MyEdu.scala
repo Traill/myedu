@@ -9,8 +9,8 @@ object MyEduModel {
   private var A : Analyzer = Analyzer(Map.empty[String, Document])
 
   // Json nodes and edges ready to be served
-  private var nodes : String = ""
-  private var edges : String = ""
+  private var nodes : Option[String] = None
+  private var edges : Option[String] = None
 
   // Json clusters ready to be served
   private var clusters : Map[String, String] = Map.empty
@@ -19,7 +19,7 @@ object MyEduModel {
   private implicit val formats = DefaultFormats
 
   // Must be called to initialize all data from disk
-  def init(path : String) : Unit = { 
+  def init(path : String) : Unit = {
     A = Analyzer.fromCache(path).load
   }
 
@@ -32,14 +32,14 @@ object MyEduModel {
 
   // Function for getting a json of all the nodes
   def getNodeIds : String = {
-    if (nodes == "") nodes = Serialization.write(A.docs.map { case (id,_) => id })
-    return nodes
+    if (nodes == None) nodes = Some(Serialization.write(A.docs.map { case (id,_) => id }))
+    return nodes.get
   }
 
   // Function for getting a json of all the nodes
   def getEdges : String = {
-    if (edges == "") edges = Serialization.write(A.graph.edges)
-    return edges
+    if (edges == None) edges = Some(Serialization.write(A.graph.edges))
+    return edges.get
   }
 
   // Returns a cluster of size/type k

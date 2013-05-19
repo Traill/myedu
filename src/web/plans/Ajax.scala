@@ -3,6 +3,7 @@ package web
 import unfiltered.request._
 import unfiltered.response._
 import net.liftweb.json.JsonDSL._
+import net.liftweb.json._
 import unfiltered.netty._
 import sun.misc.BASE64Decoder
 
@@ -22,13 +23,13 @@ object Ajax extends async.Plan with ServerErrorResponse {
     // Get nodes
     case req @ Path(Seg("ajax" :: "nodeIDs" :: Nil)) => {
       val json : String = MyEduModel.getNodeIds
-      req.respond(Json(("success" -> true) ~ ("ids" -> json)))
+      req.respond(Json(("success" -> true) ~ ("ids" -> parse(json))))
     }
 
     // Get edges
     case req @ Path(Seg("ajax" :: "edges" :: Nil)) => {
       val json : String = MyEduModel.getEdges
-      req.respond(Json(("success" -> true) ~ ("edges" -> json)))
+      req.respond(Json(("success" -> true) ~ ("edges" -> parse(json))))
     }
 
     // Get cluser of size k
