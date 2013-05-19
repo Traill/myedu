@@ -7,7 +7,7 @@
 
 define(
     //The array of dependencies
-    ["jquery", "d3", "util/extend", "graph/Node/node"],
+    ["jquery", "d3", "util/extend", "graph/Node/nodeEdu"],
 
     // We define a new function node which we can extend
     function ($, d3, extend, Node) {

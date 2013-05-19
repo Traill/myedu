@@ -13,7 +13,7 @@ define(['angular', 'app', 'views/graphic', 'graph/Core/graph', "graph/Layout/lay
 			console.log('Loading '+edges.length + ' edges...')
 
 			// Create the graph
-			var graph = new Graph(edges.slice(1, 1000)),
+			var graph = new Graph(edges),
 
 			// display a common renderer: the forceLayout:
 			layout = new Layout(graph, g);
