@@ -23,6 +23,7 @@ define(
 
         function NodeEdu (_id, data) {
 
+            var id = _id;
             var ui = null;
 
             // we are etending the default node:
@@ -33,7 +34,7 @@ define(
                
                 if(ui == null){
                     
-                    console.log(colorBySection(_id) )
+                    
                     ui = Viva.Graph.svg('circle')
                         .attr('r', 5)
                         .attr('fill', colorBySection(_id) )
