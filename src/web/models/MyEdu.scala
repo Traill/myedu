@@ -52,4 +52,9 @@ object MyEduModel {
 
     return clusters(k)
   }
+
+  // Returns the map of course
+  def getCourses : Map[String,Course] = A.docs.map {
+    case (_, Document(id, c @ Course(_,_,_), _, _, _)) => (id -> c)
+  }
 }
