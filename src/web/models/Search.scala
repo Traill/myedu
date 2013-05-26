@@ -12,12 +12,18 @@ object SearchModel {
   }
 
 
-  def isResult(context : List[String])(term : String, c : Course) : Boolean = context match {
-    case "title" :: cs if isMatch(c.title.text, term, 1)    => true
-    case "profs" :: cs if isMatch(c.title.text, term, 1)    => true
-    case "desc" :: cs if isMatch(c.title.text, term, 0)     => true
-    case _ :: cs                                            => isResult(cs)(term, c)
-    case Nil                                                => false
+  def isResult(context : List[String])(term : String, c : Course) : Boolean = {
+    val title = c.title.text.toLowerCase
+    val profs = c.profs.map(_.name).mkString.toLowerCase
+    val desc = c.desc.text.toLowerCase
+    val t = term.toLowerCase
+    context match {
+      case "title" :: cs if isMatch(title, t, 1)    => true
+      case "profs" :: cs if isMatch(profs, t, 1)    => true
+      case "desc" :: cs if isMatch(desc, t, 0)      => true
+      case _ :: cs                                  => isResult(cs)(term, c)
+      case Nil                                      => false
+    }
   }
 
 
@@ -34,7 +40,7 @@ object SearchModel {
 
   // From http://oldfashionedsoftware.com/2009/11/19/string-distance-and-refactoring-in-scala/
   def stringDistance(s1: String, s2: String): Int = {
-    val memo = Map[(List[Char],List[Char]),Int]()
+    val memo = scala.collection.mutable.Map[(List[Char],List[Char]),Int]()
     def min(a:Int, b:Int, c:Int) = Math.min( Math.min( a, b ), c)
     def sd(s1: List[Char], s2: List[Char]): Int = {
       if (memo.contains((s1,s2)) == false)

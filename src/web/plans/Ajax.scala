@@ -76,6 +76,17 @@ object Ajax extends async.Plan with ServerErrorResponse {
       req.respond(Json(("success" -> true)))
     }
 
+    // Search in graph
+    case req @ Path(Seg("search" :: contextString :: term :: Nil)) => {
+      val context : List[String] = contextString.split(",").toList
+      val ids = SearchModel.search(term, context)
+      val json = ids.length match {
+        case 0 => parse("[]")
+        case n => parse(ids.mkString("[\"","\",\"","\"]"))
+      }
+      req.respond(Json("ids" -> json))
+    }
+
 
   }
 
