@@ -4,8 +4,7 @@ Trailhead
 Introduction
 ------------
 
-Trailhead aims to make it easier to browse scientific articles or similar 
-collections of textual information. The code consists of a user interface 
+Trailhead merged with myEdu aims to make it easier to browse course. The code consists of a user interface 
 written in *html* and *javascript* and a backend written in *scala*. The 
 backend is split into two separate parts:
 
